@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- BACKGROUND PARTICLES -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-bar-wrap">
+    <div id="progress-bar"></div>
+    <div id="progress-label">РІВЕНЬ <span id="level-num">1</span> / 8</div>
+  </div>
+
+  <!-- ===== LEVEL 1 — INPUT ===== -->
+  <section class="level active" id="level-1">
+    <div class="level-inner">
+      <div class="level-badge">01</div>
+      <h2 class="level-title">КЛЮЧОВЕ СЛОВО</h2>
+      <p class="level-desc">Введи фразу (2 слова), яка асоціюється з початком всього…</p>
+      <div class="input-wrap">
+        <input id="l1-input" class="cyber-input" type="text" placeholder="_ _ _ _ _" autocomplete="off" spellcheck="false" />
+        <button class="cyber-btn" id="l1-btn" onclick="checkLevel1()">ПІДТВЕРДИТИ</button>
+      </div>
+      <p class="hint" id="l1-hint">Спробуй згадати той самий вечір…</p>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 2 — MATH ===== -->
+  <section class="level" id="level-2">
+    <div class="level-inner">
+      <div class="level-badge">02</div>
+      <h2 class="level-title">РІВНЯННЯ ЖИТТЯ</h2>
+      <p class="level-desc">Розв'яжи рівняння та знайди X</p>
+      <div class="equation-box">
+        <span class="eq-part">(2 * (</span>
+        <span class="eq-part">29052026 - х))</span>
+        <span class="eq-op">÷</span>
+        <span class="eq-part">13356</span>
+        <span class="eq-op">=</span>
+        <span class="eq-result">888</span>
+      </div>
+      
+      <div class="input-wrap">
+        <input id="l2-input" class="cyber-input" type="text"  maxlength="8" autocomplete="off" />
+        <button class="cyber-btn" onclick="checkLevel2()">ОБЧИСЛИТИ</button>
+      </div>
+      <p class="hint" id="l2-hint"></p>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 3 — SORTABLE ===== -->
+  <section class="level" id="level-3">
+    <div class="level-inner">
+      <div class="level-badge">03</div>
+      <h2 class="level-title">ХРОНОГРАФ МОМЕНТІВ</h2>
+      <p class="level-desc">Розстав картки у хронологічному порядку — від найдавнішого до найновішого</p>
+      <div id="sort-cards" class="sort-area">
+      </div>
+      <button class="cyber-btn" id="l3-confirm" style="display:none;margin-top:1.5rem;" onclick="confirmLevel3()">ПІДТВЕРДИТИ ПОРЯДОК</button>
+      <p class="hint" id="l3-hint"></p>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 4 — MAP ===== -->
+  <section class="level" id="level-4">
+    <div class="level-inner wide">
+      <div class="level-badge">04</div>
+      <h2 class="level-title">ЗНАКОВЕ МІСЦЕ</h2>
+      <p class="level-desc">Знайди на мапі місце нашого першого побачення і клікни на нього</p>
+      <div id="map-container">
+        <div id="map"></div>
+        <div id="map-crosshair">＋</div>
+      </div>
+      <p class="hint" id="l4-hint">Точність ±100 метрів</p>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 5 — QUIZ ===== -->
+  <section class="level" id="level-5">
+    <div class="level-inner">
+      <div class="level-badge">05</div>
+      <h2 class="level-title">КІНОМАРАФОН</h2>
+      <div id="quiz-container">
+        <!-- питання генеруються в JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 6 — SCRATCH ===== -->
+  <section class="level" id="level-6">
+    <div class="level-inner">
+      <div class="level-badge">06</div>
+      <h2 class="level-title">ПРОЯВИ СПОГАД</h2>
+      <p class="level-desc">Стирай захисний шар, щоб проявити наше фото</p>
+      <div id="scratch-wrap">
+        <canvas id="scratch-canvas"></canvas>
+        <img id="scratch-photo" src="" alt="our photo" />
+      </div>
+      <p class="hint" id="l6-hint">Проведи пальцем або мишкою по екрану…</p>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 7 — SELECTION ===== -->
+  <section class="level" id="level-7">
+    <div class="level-inner">
+      <div class="level-badge">07</div>
+      <h2 class="level-title">МАНІФЕСТАЦІЯ МАЙБУТНЬОГО</h2>
+      <p class="level-desc">Обери 5 планів, які ми здійснимо разом</p>
+      <div id="tag-cloud"></div>
+      <div id="selected-goals"></div>
+      <button class="cyber-btn" id="l7-btn" style="display:none;margin-top:1.5rem;" onclick="confirmLevel7()">ЗБЕРЕГТИ МРІЇ</button>
+    </div>
+  </section>
+
+  <!-- ===== LEVEL 8 — INFINITY FULLSCREEN ===== -->
+  <section class="level" id="level-8">
+    <!-- canvas for flying hearts -->
+    <canvas id="hearts-canvas"></canvas>
+
+    <!-- top title (hidden until final) -->
+    <div id="l8-top-text">
+      <p id="l8-title-main">Ти — моя нескінченність</p>
+      <p id="l8-title-sub">Кожен рівень — це наша пам&#x2019;ять ∞</p>
+    </div>
+
+    <!-- three sideways 8s (∞ shape), centered on screen -->
+    <div id="infinity-stage">
+      <svg id="inf-svg" viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg">
+        <g id="eight-left"  class="eight-group">
+          <text class="eight-glyph" x="60"  y="150">8</text>
+        </g>
+        <g id="eight-center" class="eight-group">
+          <text class="eight-glyph" x="200" y="150">8</text>
+        </g>
+        <g id="eight-right"  class="eight-group">
+          <text class="eight-glyph" x="340" y="150">8</text>
+        </g>
+      </svg>
+      <p id="l8-together">днів - ми разом</p>
+    </div>
+
+    <!-- infinity symbol that hearts build (hidden at start) -->
+    <div id="inf-final-symbol" style="display:none;">&#x221E;</div>
+
+    <!-- saved dreams -->
+    <div id="saved-goals-display"></div>
+  </section>
+
+  <!-- LEAFLET -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script src="config.js"></script>
+  <script src="background.js"></script>
+  <script src="levels.js"></script>
+  <script src="map.js"></script>
+  <script src="scratch.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
